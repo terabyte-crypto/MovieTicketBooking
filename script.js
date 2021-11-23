@@ -1,12 +1,13 @@
 const container = document.querySelector('.container');
 const seats = document.querySelectorAll('.row .seat:not(.occupied');
 const count = document.getElementById('count');
-const food = document.getElementById('popcorn');
+const food = document.getElementById('food');
 const total = document.getElementById('total');
 const movieSelect = document.getElementById('movie');
 
 populateUI();
 let ticketPrice = +movieSelect.value;
+let FoodPrice = +0;
 
 // Save selected movie index and price
 function setMovieData(movieIndex, moviePrice) {
@@ -17,19 +18,20 @@ function setMovieData(movieIndex, moviePrice) {
 // update total and count
 function updateSelectedCount() {
   const selectedSeats = document.querySelectorAll('.row .seat.selected');
-
+  
   const seatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
-
+  
   localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
-
+  
   //copy selected seats into arr
   // map through array
   //return new array of indexes
-
+  
   const selectedSeatsCount = selectedSeats.length;
-
+  
   count.innerText = selectedSeatsCount;
-  total.innerText = selectedSeatsCount * ticketPrice;
+  let price = selectedSeatsCount * ticketPrice + FoodPrice ;
+  total.innerText = price;
 }
 
 // get data from localstorage and populate ui
@@ -54,6 +56,28 @@ function populateUI() {
 movieSelect.addEventListener('change', (e) => {
   ticketPrice = +e.target.value;
   setMovieData(e.target.selectedIndex, e.target.value);
+  updateSelectedCount();
+});
+
+food.addEventListener('click', (e) => {
+  if (e.target.classList.contains('popcorn')) {
+    e.target.classList.toggle('PopcornAdded');
+    if(!e.target.classList.contains('PopcornAdded')){
+      FoodPrice -= 100;
+    }
+    else{
+      FoodPrice += 100;
+    }
+  }
+  if (e.target.classList.contains('beverage')) {
+    e.target.classList.toggle('BeverageAdded');
+    if(!e.target.classList.contains('BeverageAdded')){
+      FoodPrice -= 50;
+    }
+    else{
+      FoodPrice += +50;
+    }
+  }
   updateSelectedCount();
 });
 
