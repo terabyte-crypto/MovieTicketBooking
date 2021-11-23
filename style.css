@@ -45,6 +45,25 @@ body {
   border-top-right-radius: 10px;
 }
 
+#popcorn {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  padding-top: 5px ;
+  color: green;
+  background-color: skyblue;
+  height: 30px;
+  width: 80px;
+  border: 2px solid white;
+  margin: 3px;
+}
+
+.food{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
 .seat.selected {
   background-color: #6feaf6;
 }

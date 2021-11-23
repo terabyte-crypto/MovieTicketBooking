@@ -1,6 +1,7 @@
 const container = document.querySelector('.container');
 const seats = document.querySelectorAll('.row .seat:not(.occupied');
 const count = document.getElementById('count');
+const food = document.getElementById('popcorn');
 const total = document.getElementById('total');
 const movieSelect = document.getElementById('movie');
 
